@@ -180,7 +180,7 @@ with row1_1:
         #try:
         #     response.raise_for_status()  # Check for HTTP errors
         #     data = response.json()  # Try to decode JSON data
-        #except JSONDecodeError as e:
+   #     except JSONDecodeError as e:
         #    print("Error decoding JSON:", e)
         #    data = {}
         #
