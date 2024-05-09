@@ -139,14 +139,14 @@ st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 # 👇      CODE        👇 #
 ###########################
 
-row1_1, row1_2 = st.beta_columns((2,2))
+row1_1, row1_2 = st.columns((2,2))
 
 prediction = None
 response = None
 
 with row1_1:
 
-    st.image('img/logo-test.png', width=200)
+    st.image('logo-test.png', width=200)
     st.markdown("""
         ##
         """)
