@@ -170,7 +170,7 @@ with row1_1:
     #st.set_option('deprecation.showfileUploaderEncoding', False)
 
 
-    if st.button('🩺 Analyse it'):
+    if st.button(' Analyse it'):
         #url = 'https://odrdockerimagelight0-4rkl6m35oq-ew.a.run.app/predict'
         url = 'https://odrfinal-4rkl6m35oq-ew.a.run.app/predict'
         temp_image = str(int(time.time())) + "_" + 'img.jpg'
@@ -192,7 +192,7 @@ with row1_2:
             #
             #####
             ''')
-        st.image('img/gif-to-jpeg.jpg')
+        st.image('gif-to-jpeg.jpg')
     # else:
     #     st.markdown('''
     #         #
@@ -204,7 +204,7 @@ with row1_2:
             #
             #####
             ''')
-        st.image('img/bg-img.gif')
+        st.image('bg-img.gif')
         #st.write('Waiting for your upload')
     if response:
         st.markdown('''
@@ -234,7 +234,7 @@ with row1_2:
                 ### Result:
                 #####
                 """)
-            st.image('img/failure.png', width=50)
+            st.image('failure.png', width=50)
             st.write('**Oopsi**...')
             #st.image(uploaded_file, width=50)
             st.write('''
