@@ -7,6 +7,8 @@ from PIL import Image
 import os
 import time
 import numpy as np
+import requests
+from json.decoder import JSONDecodeError
 
 # SETTING PAGE CONFIG TO WIDE MODE
 st.set_page_config(
@@ -44,15 +46,15 @@ footer {
 }
 
 .stProgress .st-bo {
-    background-color: #ffffff !important;
+    background-color: #080808 !important;
 }
 
 .st-bq {
-    background-color: #000000 !important;
+    background-color: #d1bebe !important;
 }
 
 .css-2trqyj {
-    color: black;
+    color: white;
 }
 
 #MainMenu {
@@ -68,9 +70,9 @@ footer {
 }
 
 .stButton > .css-2trqyj {
-    color: #ffc001;
+    color:#000e57;
     background-color: white;
-    border-color: #ffc001;
+    border-color: #000e57;
     border: 2px solid;
     margin-top: 15px;
 }
@@ -127,17 +129,11 @@ iframe {
 }
 
 """
-###########################
-# BACKGROUND COLOR EXAMPLE
-###########################
-#https://cdn.wallpapersafari.com/84/18/9EUHPo.jpg
 
 st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
 
-###########################
-# 👇      CODE        👇 #
-###########################
+
 
 row1_1, row1_2 = st.columns((2,2))
 
@@ -146,7 +142,7 @@ response = None
 
 with row1_1:
 
-    st.image('logo-test.png', width=200)
+    st.image('zyx.jpg', width=200)
     st.markdown("""
         ##
         """)
@@ -176,15 +172,45 @@ with row1_1:
         temp_image = str(int(time.time())) + "_" + 'img.jpg'
         img.save(temp_image)
 
-        multipart_form_data = {
-            "inputImage" : (open(temp_image, "rb"))
-        }
-        response = requests.post(url, files=multipart_form_data)
-        prediction = response.json()
+        #multipart_form_data = {
+        #    "inputImage" : (open(temp_image, "rb"))
+        #}
+        #response = requests.post(url, files=multipart_form_data)
+        #prediction = response.json()
+        #try:
+        #     response.raise_for_status()  # Check for HTTP errors
+        #     data = response.json()  # Try to decode JSON data
+        #except JSONDecodeError as e:
+        #    print("Error decoding JSON:", e)
+        #    data = {}
+        #
+        try:
+            response.raise_for_status()  # Check for HTTP errors
+            if response.content:  # Check if response content exists
+                try:
+                    data = response.json()  # Try to decode JSON data
+            # Process the JSON data here
+                except JSONDecodeError as e:
+                    print("Error decoding JSON:", e)
+            # Handle JSON decoding error
+            else:
+                print("Response content is empty.")
+        # Handle empty response content
+        except requests.HTTPError as e:
+            print("HTTP error:", e)
+    # Handle HTTP error
+        except Exception as e:
+            print("Error:", e)
 
-        if os.path.exists(temp_image):
-            os.remove(temp_image)
-
+        #if os.path.exists(temp_image):
+         #   os.remove(temp_image)
+        temp_image = '1714363860_img.jpg'
+        time.sleep(0.5) 
+        try:
+         os.remove(temp_image)
+         print(f"File '{temp_image}' removed successfully.")
+        except Exception as e:
+         print(f"Error removing file: {e}")
 
 with row1_2:
     if uploaded_file is None:
@@ -192,7 +218,7 @@ with row1_2:
             #
             #####
             ''')
-        st.image('gif-to-jpeg.jpg')
+        st.image('abc.png')
     # else:
     #     st.markdown('''
     #         #
@@ -234,7 +260,7 @@ with row1_2:
                 ### Result:
                 #####
                 """)
-            st.image('failure.png', width=50)
+            st.image('img/failure.png', width=50)
             st.write('**Oopsi**...')
             #st.image(uploaded_file, width=50)
             st.write('''
@@ -306,9 +332,3 @@ with row1_2:
 
 
 
-components.html(
-    """
-        <p class='LILOL' style="text-align: center;font-size: 11px;font-family: sans-serif;">Made by <a href="https://github.com/LeoVeron" target= "_blank" style="color: black;text-decoration: none;font-weight: 600;">Léo Véron</a> - <a href="https://github.com/TerenceDumartin" target= "_blank" style="color: black;text-decoration: none;font-weight: 600;">Térence Dumartin</a> - <a href="https://github.com/tom1731" target= "_blank" style="color: black;text-decoration: none;font-weight: 600;">Tom Desire</a> @ Le Wagon Bordeaux</p>
-    """,
-    height=40,
-)
